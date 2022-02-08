@@ -16,9 +16,9 @@ router.post('/', async(req, res, next) => {
       var data = await usuariosModel.getUserByUsernameAndPassword(usuario,password);
 
       if(data!= undefined){
-          // req.session.id_usuario=data.id;
-          // req.session.nombre=data.usuario;
-          res.redirect('/admin/novedades');
+           req.session.id_usuario=data.id;
+           req.session.nombre=data.usuario;
+           res.redirect('/admin/novedades');
       } else{
           res.render('admin/login', {
             layout: 'admin/layout',
@@ -28,6 +28,13 @@ router.post('/', async(req, res, next) => {
     } catch(error){
       console.log(error);
     }
+});
+
+router.get('/logout', function(req, res,next){
+  req.session.destroy();
+  res.render('admin/login',{
+    layout: 'admin/layout'
+  });
 });
 
 module.exports = router;

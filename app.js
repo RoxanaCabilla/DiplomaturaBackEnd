@@ -11,7 +11,7 @@ var session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/admin/login');
-var adminRouter = require('./routes/admin/novedades');
+var adminNovedadesRouter = require('./routes/admin/novedades');
 
 var app = express();
 
@@ -38,7 +38,7 @@ secured = async (req, res, next) => {
     if(req.session.id_usuario){
       next();
     } else{
-      req.redirect('/admin/login');
+      res.redirect('/admin/login');
     }
   } catch(error){
     console.log(error);
@@ -71,7 +71,7 @@ secured = async (req, res, next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin/login', loginRouter);
-app.use('/admin/novedades', secured,  adminRouter);
+app.use('/admin/novedades', secured,  adminNovedadesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
