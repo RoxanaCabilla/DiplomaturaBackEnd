@@ -36,9 +36,9 @@ async function eliminarNovedadById(id){
 }
 
 async function getNovedadById(id){
-        var query = 'select * from novedades where id = ?';
+        var query = "select * from novedades where id = ?";
         var row = await pool.query(query, [id]);
-        return rows[0];
+        return row[0];
   
 }
 async function modificarNovedadById(obj, id){
